@@ -1,0 +1,162 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 w-75 mb-2">
+            <div class="row justify-content-between">
+                <div class="col-12 mb-2 col-md-5">
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip (click)="openDialogEntity()">Entity</mat-chip>
+                        <mat-chip (click)="openDialogRepository()">Repository</mat-chip>
+                        <mat-chip (click)="openDialogService()">Service</mat-chip>
+                        <mat-chip (click)="openDialogServiceImpl()">Service Impl</mat-chip>
+                        <mat-chip (click)="openDialogController()">Controller</mat-chip>
+                    </mat-chip-list>
+
+
+                </div>
+                <div class="col-2 me-4">
+                    <button type="submit" (click)="submitForm()" class="btn btn-dark bg-black me-md-1 me-lg-5 ms-xl-5"
+                        (click)="generar()">Generar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5 w-75">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row needs-validation" #myForm (ngSubmit)="onSubmit()">
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 mb-2 mt-md-0 col-md-4 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Package Name</mat-label>
+                                        <input matInput placeholder="mx.unach" [formControl]="pn" required
+                                        [(ngModel)]="body.packageName">
+                                        <mat-error *ngIf="pn.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+
+                                </div>
+                                <div class="col-12 col-md-4 mb-2 md-md-0 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Nombre clase</mat-label>
+                                        <input matInput placeholder="mx.unach" [formControl]="nameClase" required
+                                        [(ngModel)]="body.nameClase">
+                                        <mat-error *ngIf="nameClase.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                    
+                                </div>
+                                <div class="col-12 mb-2 md-md-0 col-md-4 d-flex row">
+
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Nombre tabla</mat-label>
+                                        <input matInput placeholder="mx.unach" [formControl]="nameTable" required
+                                        [(ngModel)]="body.nameTable">
+                                        <mat-error *ngIf="nameTable.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 mb-2 mt-md-0 col-sm-6 col-xl-3 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Tipo de dato de la PK</mat-label>
+                                        <input matInput placeholder="mx.unach" [formControl]="typePK" required
+                                        [(ngModel)]="attributeModel.typePK">
+                                        <mat-error *ngIf="typePK.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 mb-2 mt-md-0 col-sm-6 col-xl-3 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Nombre de la PK en la clase</mat-label>
+                                        <input matInput placeholder="mx.unach" [formControl]="namePK" required
+                                        [(ngModel)]="attributeModel.namePK">
+                                        <mat-error *ngIf="namePK.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div class="col-12 mb-2 mt-md-0 col-sm-6 col-xl-3 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Es Serial</mat-label>
+                                        <input matInput placeholder="true" [formControl]="isSerial" required
+                                        [(ngModel)]="attributeModel.isSerial">
+                                        <mat-error *ngIf="isSerial.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 mb-2 col-sm-6 col-xl-3  mt-md-0 d-flex row">
+
+                                    <mat-form-field appearance="fill" class="bg-white ">
+                                        <mat-label>Nombre de la PK en la DB</mat-label>
+                                        <input matInput placeholder="true" [formControl]="nameColumnDB" required
+                                        [(ngModel)]="attributeModel.nameColumnDB">
+                                        <mat-error *ngIf="nameColumnDB.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-6 w-75">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <h2 class="text-center">ATRIBUTOS NORMALES</h2>
+                </div>
+
+                <app-tabla-normal (sendAttributeToParent)="receiveAttribute($event)"></app-tabla-normal>
+            </div>
+
+        </div>
+
+        <div class="col-6 w-75">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <h2 class="text-center">ATRIBUTOS FORANEOS</h2>
+                </div>
+
+                <app-tabla-foraneos (sendAttributeToParent)="receiveAttributeFK($event)"></app-tabla-foraneos>
+            </div>
+
+        </div>
+
+        <!--
+
+            <div class="col-6 w-75 mb-3">
+            
+
+            <button class="btn btn-primary me-2" (click)="openDialogEntity()">Entity</button>
+
+            <button class="btn btn-primary me-2" (click)="openDialogRepository()">Repository</button>
+
+            <button class="btn btn-primary me-2" (click)="openDialogService()">Service</button>
+
+            <button class="btn btn-primary me-2" (click)="openDialogServiceImpl()">Service Impl</button>
+
+            <button class="btn btn-primary me-2" (click)="openDialogController()">Controller</button>
+
+            
+              
+        </div>
+        -->
+    </div>
+</div>

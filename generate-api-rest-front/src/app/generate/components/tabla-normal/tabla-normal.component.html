@@ -1,0 +1,38 @@
+<div class="col d-flex justify-content-end m-2">
+    <button mat-raised-button color="primary" (click)="openDialog()">Agregar</button>
+</div>
+
+
+<div class="col-12 mb-5">
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="typeNormal">
+                <th mat-header-cell *matHeaderCellDef> tipo normal </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeNormal}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="nameNormal">
+                <th mat-header-cell *matHeaderCellDef> nombre normal </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameNormal}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="nameColumnDB">
+                <th mat-header-cell *matHeaderCellDef> nombre column DB </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameColumnDB}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+        <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+
+</div>
