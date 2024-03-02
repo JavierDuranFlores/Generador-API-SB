@@ -1,44 +1,38 @@
-<div class="container-fluid">
+<div class="container-fluid second-dialog-content">
 
-  <div class="row">
+  <div class="row ">
     <div class="col-12">
       <h2 mat-dialog-title class="text-center">ATRIBUTO SECUNDARIO</h2>
     </div>
 
     <div class="col">
       <mat-dialog-content class="row typePK-container d-flex justify-content-center">
-        <div class="col-12 col-md-6 col-xl-3">
-        <mat-form-field class="d-flex">
+
+        <mat-form-field class="col-12 col-md-6 col-xl-3 me-md-2 d-flex row">
             <mat-label>¿Tipo de atributo?</mat-label>
             <input matInput [(ngModel)]="data.typePK" [formControl]="typePK" required>
             <mat-error *ngIf="typePK.invalid">
               {{ getErrorMessage() }}
             </mat-error>
           </mat-form-field>
-        </div>  
-
-        <div class="col-12 col-md-6 col-xl-3">
-          <mat-form-field class="d-flex">
+        
+          <mat-form-field class="col-12 col-md-6 col-xl-3 me-md-2 d-flex row">
             <mat-label>¿Nombre de atributo?</mat-label>
             <input matInput [(ngModel)]="data.namePK" [formControl]="namePK" required>
             <mat-error *ngIf="namePK.invalid">
               {{ getErrorMessage() }}
             </mat-error>
           </mat-form-field>
-        </div>
-
-        <div class="col-12 col-md-6 col-xl-3">
-          <mat-form-field class="d-flex">
+      
+          <mat-form-field class="col-12 col-md-6 col-xl-3 me-md-2 d-flex row">
             <mat-label>¿Nombre de columna?</mat-label>
             <input matInput [(ngModel)]="data.namePKBD" [formControl]="namePKBD" required>
             <mat-error *ngIf="namePKBD.invalid">
               {{ getErrorMessage() }}
             </mat-error>
           </mat-form-field>
-        </div>
 
-        <div class="col-12 col-md-6 col-xl-3">
-          <mat-form-field class="d-flex">
+          <mat-form-field class="col-12 col-md-6 col-xl-3 d-flex row">
             <mat-label>¿Cardinalidad?</mat-label>
             <select matNativeControl [(ngModel)]="data.cardinality" [formControl]="cardinality" required>
               <option value="UNO_A_UNO">Uno A Uno</option>
@@ -47,8 +41,8 @@
               <option value="MUCHOS_A_UNO">Muchos A Uno</option>
             </select>
           </mat-form-field>
-        </div>
-      </mat-dialog-content>
+
+        </mat-dialog-content>
     </div>
     <div class="col-12">
       <div class="row">

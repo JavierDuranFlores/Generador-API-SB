@@ -8,36 +8,30 @@
     <div class="col-12">
       <mat-dialog-content class="row typePK-container d-flex justify-content-center">
 
-        <div class="col col-lg-4">
-          <mat-form-field class="d-flex">
-            <mat-label>¿Tipo de atributo?</mat-label>
-            <input matInput [(ngModel)]="data.typePK" [formControl]="typePK" required>
-            <mat-error *ngIf="typePK.invalid">
-              {{ getErrorMessage() }}
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field class="col-12 col-md-4 me-md-2 d-flex row ">
+          <mat-label class="">¿Tipo de atributo?</mat-label>
+          <input matInput [(ngModel)]="data.typePK" [formControl]="typePK" required>
+          <mat-error *ngIf="typePK.invalid">
+            {{ getErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
 
-        <div class="col col-lg-4">
-          <mat-form-field class="d-flex">
-            <mat-label>¿Nombre de atributo?</mat-label>
-            <input matInput [(ngModel)]="data.namePK" [formControl]="namePK" required>
-            <mat-error *ngIf="namePK.invalid">
-              {{ getErrorMessage() }}
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field class="col-12 col-md-4 me-md-2 d-flex row">
+          <mat-label>¿Nombre de atributo?</mat-label>
+          <input matInput [(ngModel)]="data.namePK" [formControl]="namePK" required>
+          <mat-error *ngIf="namePK.invalid">
+            {{ getErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
 
-        <div class="col-12 col-lg-4">
 
-          <mat-form-field class="d-flex">
-            <mat-label>¿Nombre de columna?</mat-label>
-            <input matInput [(ngModel)]="data.namePKBD" [formControl]="namePKBD" required>
-            <mat-error *ngIf="namePKBD.invalid">
-              {{ getErrorMessage() }}
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field class="col-12 col-md-4 d-flex row">
+          <mat-label>¿Nombre de columna?</mat-label>
+          <input matInput [(ngModel)]="data.namePKBD" [formControl]="namePKBD" required>
+          <mat-error *ngIf="namePKBD.invalid">
+            {{ getErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
       </mat-dialog-content>
     </div>
 
@@ -48,7 +42,7 @@
             <button mat-raised-button (click)="onNoClick()" color="warn">Cancelar</button>
           </div>
           <div class="col-2 col-md-1 col-xl-1">
-            <button mat-raised-button 
+            <button mat-raised-button
               [mat-dialog-close]="typePK.invalid || namePK.invalid || namePKBD.invalid ? null : data" cdkFocusInitial
               color="primary">Agregar</button>
           </div>

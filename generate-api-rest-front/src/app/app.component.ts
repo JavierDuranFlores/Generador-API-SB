@@ -43,10 +43,17 @@ export class AppComponent {
 
   openDialogForaneos(): void {
     const dialogRef = this.dialog.open(AttributosForaneosComponent, {
-      data: { typePk: this.typePkForaneos, namePK: this.namePKForaneos, namePKBD: this.namePKBDForaneos, cardinality: this.cardinality }
+      data: { typePk: this.typePkForaneos, namePK: this.namePKForaneos, namePKBD: this.namePKBDForaneos, cardinality: this.cardinality },
+      backdropClass: 'bg-color',
+      panelClass: 'color-bg'
     });
 
+    dialogRef.afterOpened().subscribe(result => {
+      
+    })
+
     dialogRef.afterClosed().subscribe(result => {
+      
       console.log('The dialog was closed');
       this.typePkForaneos = result.typePK;
       this.namePKForaneos = result.namePK;
