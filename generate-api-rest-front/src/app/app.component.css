@@ -1,4 +1,20 @@
-.dialog-with-custom-class {
-    background-color: red;
-}
-
+/* Estilos para el degradado metálico negro/gris */
+.degradado-metalico-negro-gris {
+    background: linear-gradient(to right, #333333, #666666); /* Degradado de negro a gris */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Efecto metálico */
+  .degradado-metalico-negro-gris::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ffffff, #ffffff, #333333, #ffffff, #ffffff);
+    opacity: 0.3; /* Opacidad de la textura metálica */
+  }

@@ -1,4 +1,12 @@
 table {
     width: 100%;
 }
+
+
+.mat-cell {
+    max-width: 65px !important; /* Establece el ancho máximo de la celda */
+    overflow: scroll !important; /* Oculta el texto que se sale de la celda */
+    text-overflow: ellipsis !important; /* Muestra puntos suspensivos cuando el texto se corta */
+    white-space: nowrap !important; /* Evita que el texto se divida en varias líneas */
+}
   

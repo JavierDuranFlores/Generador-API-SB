@@ -12,13 +12,13 @@ import lombok.Setter;
 public class AttributeNormalModel {
   
   @Getter @Setter
-  private String typeNormal;
+  private String tipo;
 
   @Getter @Setter
-  private String nameNormal;
+  private String nombre;
 
   @Getter @Setter
-  private String nameColumnDB;
+  private String columna;
 
 }
 

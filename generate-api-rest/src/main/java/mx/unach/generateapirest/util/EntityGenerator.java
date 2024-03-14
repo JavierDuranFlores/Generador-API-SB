@@ -53,9 +53,9 @@ public class EntityGenerator {
         codeBuilder.append("\tprivate ").append(claseModel.getAttributeModel().getTypePK()).append(" ").append(claseModel.getAttributeModel().getNamePK()).append(";\n\n");
 
         for (AttributeNormalModel attribute : claseModel.getAttributeModel().getAttributeNormalModels()) {
-            String type = attribute.getTypeNormal();
-            String name = attribute.getNameNormal();
-            String nameColumnDB = attribute.getNameColumnDB();
+            String type = attribute.getTipo();
+            String name = attribute.getNombre();
+            String nameColumnDB = attribute.getColumna();
 
             codeBuilder.append("\t@Column(name = \"").append(nameColumnDB).append("\")\n");
             codeBuilder.append("\t@Getter @Setter\n");
@@ -64,7 +64,24 @@ public class EntityGenerator {
 
         for (AttributeFKModel attribute : claseModel.getAttributeModel().getAttributeFKModels()) {
             String nameColumnDBPK =claseModel.getAttributeModel().getNameColumnDB();
-            codeBuilder.append(cardinalidad(attribute.getCardinality(), attribute, nameClass, nameColumnDBPK)).append("\n");
+
+            /*if (attribute.getCardinality().name().equals("UNO A UNO")) {
+              attribute.setCardinality(Cardinality.UNO_A_UNO);
+            }
+
+            if (attribute.getCardinality().name().equals("UNO A MUCHOS")) {
+              attribute.setCardinality(Cardinality.UNO_A_MUCHOS);
+            }
+
+            if (attribute.getCardinality().name().equals("MUCHOS A MUCHOS")) {
+              attribute.setCardinality(Cardinality.MUCHOS_A_MUCHOS);
+            }
+
+            if (attribute.getCardinality().name().equals("MUCHOS A UNO")) {
+              attribute.setCardinality(Cardinality.MUCHOS_A_UNO);
+            }*/
+
+            codeBuilder.append(cardinalidad(attribute.getRelacion(), attribute, nameClass, nameColumnDBPK)).append("\n");
         }
 
         return codeBuilder.append("}");
@@ -75,9 +92,9 @@ public class EntityGenerator {
 
 
     public static StringBuilder cardinalidad(Cardinality cardinality, AttributeFKModel attributeFKModel, String className, String namePK) {
-        String type = attributeFKModel.getTypeFK();
-        String name = attributeFKModel.getNameFK();
-        String nameColumnDB = attributeFKModel.getNameColumnDB();
+        String type = attributeFKModel.getTipo();
+        String name = attributeFKModel.getTipo();
+        String nameColumnDB = attributeFKModel.getColumna();
 
         StringBuilder codeBuilder = new StringBuilder();
 
@@ -99,9 +116,9 @@ public class EntityGenerator {
             case MUCHOS_A_MUCHOS :
                 codeBuilder.append("\t@ManyToMany\n");
                 codeBuilder.append("\t@JoinTable(\n");
-                codeBuilder.append("\t\tname = \"").append(camelToSnake(className+"_"+attributeFKModel.getNameFK())).append("\",\n");
+                codeBuilder.append("\t\tname = \"").append(camelToSnake(className+"_"+attributeFKModel.getNombre())).append("\",\n");
                 codeBuilder.append("\t\tjoinColumns = @JoinColumn(name = \"").append(camelToSnake(namePK)).append("\",\n");
-                codeBuilder.append("\t\tinverseJoinColumns = @JoinColumn(name = \"").append("id_").append(singularize(attributeFKModel.getNameFK())).append("\"\n");
+                codeBuilder.append("\t\tinverseJoinColumns = @JoinColumn(name = \"").append("id_").append(singularize(attributeFKModel.getNombre())).append("\"\n");
                 codeBuilder.append("\t)\n");
                 codeBuilder.append("\tprivate Set<").append(type).append("> ").append(name).append(";\n");
                 break;

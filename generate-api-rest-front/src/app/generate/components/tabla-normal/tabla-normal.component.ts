@@ -12,7 +12,18 @@ export interface Atributos {
   namePKBD: string;
 }
 
-let ELEMENT_DATA_NORMALES: AttributeNormalModel[] = [];
+let ELEMENT_DATA_NORMALES: AttributeNormalModel[] = [
+  {
+    tipo: 'String',
+    nombre: 'nombre',
+    columna: 'nombre'
+  },
+  {
+    tipo: 'int',
+    nombre: 'edad',
+    columna: 'edad'
+  }
+];
 
 
 @Component({
@@ -23,55 +34,91 @@ let ELEMENT_DATA_NORMALES: AttributeNormalModel[] = [];
   imports: [MatPaginatorModule, MatTableModule, SharedModule]*/
 })
 export class TablaNormalComponent {
-  
+
   @Output() sendAttributeToParent: EventEmitter<AttributeNormalModel[]> = new EventEmitter<AttributeNormalModel[]>();
-  
+
   attributeNormalModel: AttributeNormalModel = {
-    typeNormal:   '',
-    nameNormal:   '',
-    nameColumnDB: ''
+    tipo: '',
+    nombre: '',
+    columna: ''
   }
 
 
-  displayedColumns: string[] = ['typeNormal', 'nameNormal', 'nameColumnDB'];
+  displayedColumns: string[] = ['tipo', 'nombre', 'columna', 'accion'];
 
   constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource<AttributeNormalModel>(ELEMENT_DATA_NORMALES);
   }
 
   dataSource!: MatTableDataSource<AttributeNormalModel>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort1!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   openDialog(): void {
 
     const dialogRef = this.dialog.open(AttributosNormalesComponent, {
-      data: { typeNormal: this.attributeNormalModel.typeNormal, nameNormal: this.attributeNormalModel.nameNormal, nameColumnDB: this.attributeNormalModel.nameColumnDB }
+      data: { tipo: this.attributeNormalModel.tipo, nombre: this.attributeNormalModel.nombre, columna: this.attributeNormalModel.columna },
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.attributeNormalModel.typeNormal = result.typePK;
-      this.attributeNormalModel.nameNormal = result.namePK;
-      this.attributeNormalModel.nameColumnDB = result.namePKBD;
-      this.insertar()
-      console.log(this.dataSource)
-      console.log(this.attributeNormalModel.typeNormal)
-      console.log(this.attributeNormalModel.nameNormal)
-      console.log(this.attributeNormalModel.nameColumnDB)
+
+      if (result!=null) {
+        this.attributeNormalModel.tipo = result.tipo;
+        this.attributeNormalModel.nombre = result.nombre;
+        this.attributeNormalModel.columna = result.columna;
+        this.insertar()
+        
+      }
+
 
     });
   }
-  
+
   insertar(): void {
-    ELEMENT_DATA_NORMALES.push({ typeNormal: this.attributeNormalModel.typeNormal, nameNormal: this.attributeNormalModel.nameNormal, nameColumnDB: this.attributeNormalModel.nameColumnDB })
+    ELEMENT_DATA_NORMALES.push({ tipo: this.attributeNormalModel.tipo, nombre: this.attributeNormalModel.nombre, columna: this.attributeNormalModel.columna })
     this.dataSource = new MatTableDataSource<AttributeNormalModel>(ELEMENT_DATA_NORMALES);
-    this.dataSource.sort = this.sort1;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
   sendAttribute() {
+    console.log(ELEMENT_DATA_NORMALES)
     this.sendAttributeToParent.emit(ELEMENT_DATA_NORMALES);
+  }
+
+  eliminar(element: any) {
+    if (element!=null) {
+      const index = ELEMENT_DATA_NORMALES.indexOf(element);
+    if (index !== -1) {
+      ELEMENT_DATA_NORMALES.splice(index, 1);
+    }
+    }
+    this.dataSource = new MatTableDataSource<AttributeNormalModel>(ELEMENT_DATA_NORMALES);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  actualizar(element: any) {
+    console.log('actualizar: ');
+    const index = ELEMENT_DATA_NORMALES.indexOf(element);
+    const dialogRef = this.dialog.open(AttributosNormalesComponent, {
+      data: { tipo: element.tipo, 
+        nombre: element.nombre, 
+        columna: element.columna, relacion: element.relacion, titulo: 'ACTUALIZAR' },
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+        if (result!=null) {
+          ELEMENT_DATA_NORMALES[index].tipo = result.tipo;
+          ELEMENT_DATA_NORMALES[index].nombre = result.nombre;
+          ELEMENT_DATA_NORMALES[index].columna = result.columna;
+        }
+      
+    });
   }
 
 }

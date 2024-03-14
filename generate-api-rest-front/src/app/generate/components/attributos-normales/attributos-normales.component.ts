@@ -21,9 +21,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 export interface DialogData {
-  typePK: string;
-  namePK: string;
-  namePKBD: string;
+  tipo: string;
+  nombre: string;
+  columna: string;
 }
 
 
@@ -35,17 +35,19 @@ export interface DialogData {
 })
 export class AttributosNormalesComponent {
 
-  typePK = new FormControl('', [Validators.required]);
-  namePK = new FormControl('', [Validators.required]);
-  namePKBD = new FormControl('', [Validators.required]);
+  tipo = new FormControl('', [Validators.required]);
+  nombre = new FormControl('', [Validators.required]);
+  columna = new FormControl('', [Validators.required]);
 
+  titulo: string = ''
   constructor(
     public dialogRef: MatDialogRef<InicioComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    this.titulo = data.titulo
+  }
 
   onNoClick(): void {
-    console.log('Name ',this.data)
     this.dialogRef.close();
   }
 

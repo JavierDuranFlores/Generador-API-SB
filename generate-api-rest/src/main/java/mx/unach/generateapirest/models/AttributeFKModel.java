@@ -10,17 +10,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class AttributeFKModel {
-  
-  @Getter @Setter
-  private String typeFK;
 
   @Getter @Setter
-  private String nameFK;
+  private String tipo;
 
   @Getter @Setter
-  private Cardinality cardinality;
+  private String nombre;
 
   @Getter @Setter
-  private String nameColumnDB;
+  private String columna;
+
+  @Getter @Setter
+  private Cardinality relacion;
 
 }

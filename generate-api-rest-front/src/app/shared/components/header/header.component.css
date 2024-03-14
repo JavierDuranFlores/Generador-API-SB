@@ -1,0 +1,42 @@
+
+:root {
+  --metallic-white-color: #ffffff; /* Definir el color blanco */
+}
+
+
+.metallic-white {
+  background: var(--metallic-white-color);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset, /* Sombra interna */
+              0 0 10px rgba(255, 255, 255, 0.5); /* Sombra externa */
+}
+
+.degradado-verde {
+    background: linear-gradient(to right, #00FF00, #008000); /* Cambia los códigos de color según tus preferencias */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+.metallic-green {
+  background: linear-gradient(45deg, #006400 0%, #008000 50%, #006400 100%); /* Gradiente verde más fuerte */
+  border-radius: 10px; /* Bordes redondeados (opcional) */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset, /* Sombra interna */
+              0 0 10px rgba(0, 0, 0, 0.5); /* Sombra externa */
+}
+
+
+.metallic-dark-blue {
+  background: linear-gradient(45deg, #000000 0%, #000033 50%, #000000 100%); /* Gradiente negro/azulado */
+  border-radius: 10px; /* Bordes redondeados (opcional) */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset, /* Sombra interna */
+              0 0 10px rgba(0, 0, 0, 0.5); /* Sombra externa */
+}
+
+
+.metallic-dark {
+  background: linear-gradient(45deg, #000000 0%, #333333 50%, #000000 100%); /* Gradiente negro/gris oscuro */
+  border-radius: 10px; /* Bordes redondeados (opcional) */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset, /* Sombra interna */
+              0 0 10px rgba(0, 0, 0, 0.5); /* Sombra externa */
+}
+

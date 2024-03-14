@@ -23,6 +23,9 @@ import { RepositoryComponent } from './components/repository/repository.componen
 import { ServComponent } from './components/serv/serv.component';
 import { ServImplComponent } from './components/serv-impl/serv-impl.component';
 import { ControladorComponent } from './components/controlador/controlador.component';
+import { DialogErrorComponent } from './components/dialog-error/dialog-error.component';
+import { DialogCopyComponent } from './components/dialog-copy/dialog-copy.component';
+import { DocumentacionComponent } from './pages/documentacion/documentacion.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +39,10 @@ import { ControladorComponent } from './components/controlador/controlador.compo
         RepositoryComponent,
         ServComponent,
         ServImplComponent,
-        ControladorComponent
+        ControladorComponent,
+        DialogErrorComponent,
+        DialogCopyComponent,
+        DocumentacionComponent
     ],
     imports: [
         CommonModule,

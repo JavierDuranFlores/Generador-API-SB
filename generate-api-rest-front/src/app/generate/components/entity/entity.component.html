@@ -7,9 +7,9 @@
     <mat-card class="example-card ">
         <!--<mat-card-title>Entity</mat-card-title>-->
         <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-        <mat-card-content class=" ">
+        <mat-card-content>
             <!--<p>This card indeterminates progress bar.</p>-->
-            <pre><code class="java">{{entity}}</code></pre>
+            <pre class="java"><code>{{entity}}</code></pre>
         </mat-card-content>
         <mat-card-actions>
             
@@ -19,7 +19,7 @@
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close color="warn">Cancel</button>
   <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-    <mat-icon class="material-symbols-outlined">
+    <mat-icon (click)="copiarTexto()" class="material-symbols-outlined">
       content_copy
       </mat-icon>
     </button>

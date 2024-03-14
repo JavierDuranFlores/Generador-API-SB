@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './generate/pages/inicio/inicio.component';
 import { VisualizacionCodigoComponent } from './generate/pages/visualizacion-codigo/visualizacion-codigo.component';
+import { DocumentacionComponent } from './generate/pages/documentacion/documentacion.component';
 
 
 const routes: Routes = [
@@ -15,8 +16,8 @@ const routes: Routes = [
         component: InicioComponent
     },
     {
-        path: 'visualizacion-codigo',
-        component: VisualizacionCodigoComponent
+        path: 'documentacion',
+        component: DocumentacionComponent
     },
     {
         path: '**',

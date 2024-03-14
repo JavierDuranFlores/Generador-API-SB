@@ -6,18 +6,26 @@
             <div class="row justify-content-between">
                 <div class="col-12 mb-2 col-md-5">
                     <mat-chip-list aria-label="Fish selection">
-                        <mat-chip (click)="openDialogEntity()">Entity</mat-chip>
-                        <mat-chip (click)="openDialogRepository()">Repository</mat-chip>
-                        <mat-chip (click)="openDialogService()">Service</mat-chip>
-                        <mat-chip (click)="openDialogServiceImpl()">Service Impl</mat-chip>
-                        <mat-chip (click)="openDialogController()">Controller</mat-chip>
+                        <mat-chip [disabled]="disabled"
+                            (click)="!disabled ? openDialogEntity() : false">Entity</mat-chip>
+                        <mat-chip [disabled]="disabled"
+                            (click)="!disabled ? openDialogRepository(): false">Repository</mat-chip>
+                        <mat-chip [disabled]="disabled"
+                            (click)="!disabled ? openDialogService() : false">Service</mat-chip>
+                        <mat-chip [disabled]="disabled" (click)="!disabled ? openDialogServiceImpl(): false">Service
+                            Impl</mat-chip>
+                        <mat-chip [disabled]="disabled"
+                            (click)="!disabled ? openDialogController() : false">Controller</mat-chip>
                     </mat-chip-list>
 
 
                 </div>
                 <div class="col-2 me-4">
-                    <button class="btn btn-dark bg-black me-md-1 me-lg-5 ms-xl-5"
-                        (click)="generar()">Generar</button>
+
+                    <button class="btn btn-dark bg-black me-md-1 me-lg-5 ms-xl-5" (click)="generar()"
+                        id="liveToastBtn">Generar</button>
+
+
                 </div>
             </div>
         </div>
@@ -64,7 +72,7 @@
                             <mat-form-field appearance="fill" class="bg-white ">
                                 <mat-label>Tipo de dato de la PK</mat-label>
                                 <input matInput placeholder="mx.unach" [formControl]="typePK" required
-                                    [(ngModel)]="attributeModel.typePK">
+                                    [(ngModel)]="attributeModel.typePK" (blur)="onInputBlur()">
                                 <mat-error *ngIf="typePK.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
@@ -79,12 +87,19 @@
                         </div>
 
                         <div class="col-12 col-md-6 col-xxl-3 mb-2 mb-md-0 d-flex row">
-                            <mat-form-field appearance="fill" class="bg-white ">
-                                <mat-label>Es Serial</mat-label>
-                                <input matInput placeholder="true" [formControl]="isSerial" required
-                                    [(ngModel)]="attributeModel.isSerial">
+
+                            <mat-form-field  appearance="fill" class="bg-white ">
+                                <mat-label>Es serial</mat-label>
+                                <select matNativeControl [(ngModel)]="attributeModel.isSerial" [formControl]="isSerial"
+                                    required >
+                                    <option [disabled]="isSerialValid
+                                    "  value="false">false</option>
+                                    <option [disabled]="isSerialValid"  value="true">true</option>
+                                </select>
                                 <mat-error *ngIf="isSerial.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
+
+
                         </div>
 
                         <div class="col-12 col-md-6 col-xxl-3 mb-2 mb-md-0 d-flex row">
@@ -108,7 +123,9 @@
             <div class="row">
 
                 <div class="col-12">
-                    <h2 class="text-center">ATRIBUTOS NORMALES</h2>
+                    <mat-card style="background-color: #218c74;">
+                        <h2 class="text-center">ATRIBUTOS NORMALES</h2>
+                    </mat-card>
                 </div>
 
                 <app-tabla-normal (sendAttributeToParent)="receiveAttribute($event)"></app-tabla-normal>
@@ -116,15 +133,17 @@
 
         </div>
 
-        <div class="col-6 w-75">
+        <div class="col-6 w-100">
 
             <div class="row">
 
                 <div class="col-12">
-                    <h2 class="text-center">ATRIBUTOS FORANEOS</h2>
+                    <mat-card style="background-color: #218c74;">
+                        <h2 class="text-center">ATRIBUTOS FORANEOS</h2>
+                    </mat-card>
                 </div>
 
-                <app-tabla-foraneos (sendAttributeToParent)="receiveAttributeFK($event)"></app-tabla-foraneos>
+                <app-tabla-foraneos  (sendAttributeToParent)="receiveAttributeFK($event)"></app-tabla-foraneos>
             </div>
 
         </div>

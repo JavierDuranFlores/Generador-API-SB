@@ -1,6 +1,6 @@
 export interface AttributeFKModel {
-    typeFK:       string;
-    nameFK:       string;
-    cardinality:  string;
-    nameColumnDB: string;
+    tipo:       string;
+    nombre:       string;
+    columna: string;
+    relacion:  string;
 }

@@ -33,7 +33,9 @@ import {MatChipsModule} from '@angular/material/chips';
     FormsModule,
     MatCardModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
+    
   ],
   imports: [
     CommonModule

@@ -8,10 +8,10 @@ import {
 import {FormControl, Validators} from '@angular/forms';
 
 export interface DialogData {
-  typePK: string;
-  namePK: string;
-  namePKBD: string;
-  cardinality: string
+  tipo: string;
+  nombre: string;
+  columna: string;
+  relacion: string
 }
 
 @Component({
@@ -23,18 +23,39 @@ export interface DialogData {
 })
 export class AttributosForaneosComponent {
 
-  typePK = new FormControl('', [Validators.required]);
-  namePK = new FormControl('', [Validators.required]);
-  namePKBD = new FormControl('', [Validators.required]);
-  cardinality = new FormControl('', [Validators.required]);
+  tipo = new FormControl('', [Validators.required]);
+  nombre = new FormControl('', [Validators.required]);
+  columna = new FormControl('', [Validators.required]);
+  relacion = new FormControl('', [Validators.required]);
 
+  is1a1: boolean = false
+  is1aN: boolean = false
+  isNa1: boolean = false
+  isNaM: boolean = false
+
+  titulo: string = ''
   constructor(
     public dialogRef: MatDialogRef<InicioComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    this.titulo = data.titulo
+    switch(data.relacion) {
+      case '1A1':
+        this.is1a1=true;
+        break;
+      case '1AN':
+        this.is1aN=true;
+        break;
+      case 'NA1':
+        this.isNa1=true;
+        break;
+      case 'NAM':
+        this.isNaM=true;
+        break;
+    }
+  }
 
   onNoClick(): void {
-    console.log('Name ',this.data)
     this.dialogRef.close();
   }
 

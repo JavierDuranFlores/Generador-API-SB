@@ -21,3 +21,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: black !important;
 }
 
+.metallic-green {
+  background: linear-gradient(45deg, #006400 0%, #008000 50%, #006400 100%); /* Gradiente verde más fuerte */
+  border-radius: 10px; /* Bordes redondeados (opcional) */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset, /* Sombra interna */
+              0 0 10px rgba(0, 0, 0, 0.5); /* Sombra externa */
+}

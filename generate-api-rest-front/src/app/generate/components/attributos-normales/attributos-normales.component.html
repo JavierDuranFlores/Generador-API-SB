@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-12">
-      <h2 mat-dialog-title class="text-center">ATRIBUTO NORMAL</h2>
+      <h2 mat-dialog-title class="text-center">ATRIBUTO NORMAL {{titulo}}</h2>
     </div>
 
     <div class="col-12">
@@ -10,16 +10,16 @@
 
         <mat-form-field class="col-12 col-md-4 me-md-2 d-flex row ">
           <mat-label class="">¿Tipo de atributo?</mat-label>
-          <input matInput [(ngModel)]="data.typePK" [formControl]="typePK" required>
-          <mat-error *ngIf="typePK.invalid">
+          <input matInput [(ngModel)]="data.tipo" [formControl]="tipo" required>
+          <mat-error *ngIf="tipo.invalid">
             {{ getErrorMessage() }}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-12 col-md-4 me-md-2 d-flex row">
           <mat-label>¿Nombre de atributo?</mat-label>
-          <input matInput [(ngModel)]="data.namePK" [formControl]="namePK" required>
-          <mat-error *ngIf="namePK.invalid">
+          <input matInput [(ngModel)]="data.nombre" [formControl]="nombre" required>
+          <mat-error *ngIf="nombre.invalid">
             {{ getErrorMessage() }}
           </mat-error>
         </mat-form-field>
@@ -27,8 +27,8 @@
 
         <mat-form-field class="col-12 col-md-4 d-flex row">
           <mat-label>¿Nombre de columna?</mat-label>
-          <input matInput [(ngModel)]="data.namePKBD" [formControl]="namePKBD" required>
-          <mat-error *ngIf="namePKBD.invalid">
+          <input matInput [(ngModel)]="data.columna" [formControl]="columna" required>
+          <mat-error *ngIf="columna.invalid">
             {{ getErrorMessage() }}
           </mat-error>
         </mat-form-field>
@@ -43,7 +43,7 @@
           </div>
           <div class="col-2 col-md-1 col-xl-1">
             <button mat-raised-button
-              [mat-dialog-close]="typePK.invalid || namePK.invalid || namePKBD.invalid ? null : data" cdkFocusInitial
+              [mat-dialog-close]="tipo.invalid || nombre.invalid || columna.invalid ? null : data" cdkFocusInitial
               color="primary">Agregar</button>
           </div>
         </mat-dialog-actions>

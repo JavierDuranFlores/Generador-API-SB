@@ -8,6 +8,7 @@ public class ControllerGenerator {
 
         String packageName = claseModel.getPackageName();
         String nameClass = claseModel.getNameClase();
+        String nameClassEntity = claseModel.getNameClase()+"Entity";
         String namePK = claseModel.getAttributeModel().getNamePK();
         String typePK = claseModel.getAttributeModel().getTypePK();
         String nameTable = claseModel.getNameTable();
@@ -33,7 +34,7 @@ public class ControllerGenerator {
         codeBuilder.append("import org.springframework.web.bind.annotation.RestController;\n\n");
 
 
-        codeBuilder.append("import ").append(packageName).append(".entity.").append(nameClass).append(";\n");
+        codeBuilder.append("import ").append(packageName).append(".entity.").append(nameClassEntity).append(";\n");
         codeBuilder.append("import ").append(packageName).append(".service.impl.").append(nameClass).append("ServiceImpl").append(";\n\n");
 
         codeBuilder.append("@RestController\n");
@@ -45,56 +46,56 @@ public class ControllerGenerator {
         codeBuilder.append("\t@Qualifier(\"").append(StringUtils.firstLetterToLowerCase(nameClass)).append("ServiceImpl").append("\")\n");
         codeBuilder.append("\tprivate ").append(nameClass).append("ServiceImpl").append(" ").append(StringUtils.firstLetterToLowerCase(nameClass)).append("ServiceImpl").append(";\n\n");
 
-        String typeReturn = "List<"+nameClass+">";
-        String nameMethod = "listAll"+nameClass+"s";
+        String typeReturn = "List<"+nameClassEntity+">";
+        String nameMethod = "findAll"+nameClass+"s";
         String parameters[] = new String[2];
         String annotacions[] = new String[2];
         String path = "/"+StringUtils.firstLetterToLowerCase(nameClass)+"s";
         codeBuilder.append(methodHttp("@GetMapping", path));
         codeBuilder.append(methodCreate(typeReturn, nameMethod, parameters, annotacions));
-        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".findAll", "();"));
+        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".findAll" + nameClass, "s();"));
         codeBuilder.append("\t}\n\n");
 
-        typeReturn = "Optional<"+nameClass+">";
+        typeReturn = "Optional<"+nameClassEntity+">";
         nameMethod = "findBy"+StringUtils.capitalizeFirstLetter(namePK);
         parameters[0] = typePK+" "+namePK;
         annotacions[0] = "@PathVariable";
         codeBuilder.append(methodHttp("@GetMapping", path+"/{"+namePK+"}"));
         codeBuilder.append(methodCreate(typeReturn, nameMethod, parameters, annotacions));
-        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".findById(", namePK+")"));
+        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".findById" + nameClass + "(", namePK+");")); 
         codeBuilder.append("\t}\n\n");
 
-        typeReturn = nameClass;
+        typeReturn = nameClassEntity;
         nameMethod = "create"+nameClass;
-        parameters[0] = nameClass+" "+StringUtils.firstLetterToLowerCase(nameClass);
+        parameters[0] = nameClassEntity+" "+StringUtils.firstLetterToLowerCase(nameClass);
         annotacions[0] = "@RequestBody";
         codeBuilder.append(methodHttp("@PostMapping", path));
         codeBuilder.append(methodCreate(typeReturn, nameMethod, parameters, annotacions));
-        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".createOrUpdate(", StringUtils.firstLetterToLowerCase(nameClass)+")"));
+        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".createOrUpdate" + nameClass + "(", StringUtils.firstLetterToLowerCase(nameClass)+");"));
         codeBuilder.append("\t}\n\n");
 
-        typeReturn = typePK;
+        typeReturn = nameClassEntity;
         nameMethod = "update"+nameClass;
-        parameters[0] = nameClass+" "+StringUtils.firstLetterToLowerCase(nameClass);
+        parameters[0] = nameClassEntity+" "+StringUtils.firstLetterToLowerCase(nameClass);
         annotacions[0] = "@RequestBody";
         parameters[1] = typePK+" "+namePK;
         annotacions[1] = "@PathVariable";
         codeBuilder.append(methodHttp("@PutMapping", path+"/{"+namePK+"}"));
         codeBuilder.append(methodCreate(typeReturn, nameMethod, parameters, annotacions));
-        codeBuilder.append("\t\tOptional<").append(nameClass).append(">").append(" actualizar = ").append(StringUtils.firstLetterToLowerCase(nameClass)).append("ServiceImpl").append(".findById(").append(namePK).append(");\n");
-        codeBuilder.append("\t\t").append(StringUtils.firstLetterToLowerCase(nameClass)).append(".get().set").append(StringUtils.capitalizeFirstLetter(namePK)).append("(actualizar.get").append(StringUtils.capitalizeFirstLetter(namePK)).append("());\n");
-        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".createOrUpdate(", StringUtils.firstLetterToLowerCase(nameClass)+")"));
+        codeBuilder.append("\t\tOptional<").append(nameClassEntity).append(">").append(" actualizar = ").append(StringUtils.firstLetterToLowerCase(nameClass)).append("ServiceImpl").append(".findById"+nameClass+"(").append(namePK).append(");\n");
+        codeBuilder.append("\t\t").append(StringUtils.firstLetterToLowerCase("actualizar")).append(".get().set").append(StringUtils.capitalizeFirstLetter(namePK)).append("(").append(StringUtils.firstLetterToLowerCase(nameClass)).append(".get").append(StringUtils.capitalizeFirstLetter(namePK)).append("());\n");
+        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".createOrUpdate" + nameClass+ "(", StringUtils.firstLetterToLowerCase("actualizar.get()")+");"));
         codeBuilder.append("\t}\n\n");
 
         typeReturn = typePK;
-        nameMethod = "delete"+nameClass;
+        nameMethod = "deleteById"+nameClass;
         parameters[0] = typePK+" "+namePK;
         annotacions[0] = "@PathVariable";
         parameters[1] = "";
         annotacions[1] = "";
         codeBuilder.append(methodHttp("@DeleteMapping", path+"/{"+namePK+"}"));
         codeBuilder.append(methodCreate(typeReturn, nameMethod, parameters, annotacions));
-        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".deleteBy"+StringUtils.capitalizeFirstLetter(claseModel.getAttributeModel().getNamePK())+"(", namePK+")"));
+        codeBuilder.append(bodyMethod(StringUtils.firstLetterToLowerCase(nameClass)+"ServiceImpl", ".deleteBy"+StringUtils.capitalizeFirstLetter(claseModel.getAttributeModel().getNamePK())+"(", namePK+");"));
         codeBuilder.append("\t}\n\n");
 
         return codeBuilder.append("}");
